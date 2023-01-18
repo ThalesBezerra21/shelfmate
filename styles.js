@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
       color: "#FFFFFF",
       textAlign: 'center',
       verticalAlign: 'middle',
-      lineHeight: 120,
+      marginTop: 50,
     },
   
     mainCard: {
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
       paddingLeft: '10%',
       paddingRight: '10%',
       paddingBottom: 40,
+      marginTop: 50,
     },
 
     cardContainer: {

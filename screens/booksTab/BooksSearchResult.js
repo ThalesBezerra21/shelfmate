@@ -1,12 +1,12 @@
 import MainWrapper from "../../components/MainWrapper";
-import { Text, ActivityIndicator } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { useEffect, useState } from "react";
 import BookCard from "../../components/BookCard";
-const noCover = "https://islandpress.org/sites/default/files/default_book_cover_2015.jpg"
+import *  as lb from "../../lib/getInfoFromBooksJson";
 
 
-export default function BooksSearchResult({ route }) {
+export default function BooksSearchResult({ route, navigation }) {
 
     const [searchQuery, setSearchQuery] = useState(route.params.search);
     const [searchResult, setSearchResult] = useState(null);
@@ -56,18 +56,16 @@ export default function BooksSearchResult({ route }) {
             />
             {
                 searchResult != null && typeof searchResult.items != 'undefined' ?
-                    searchResult.items
-                    
-                    .map((book) => {
-                        return (<BookCard style={{ marginTop: 20 }}
-                            title={book["volumeInfo"]["title"]} 
-                            author = {book.volumeInfo.authors? book["volumeInfo"]["authors"].join(", "): ""}
-                            image_link={book.volumeInfo.imageLinks? book.volumeInfo.imageLinks.thumbnail? book.volumeInfo.imageLinks.thumbnail: noCover: noCover}
-                            message1={book.volumeInfo.publisher? book.volumeInfo.publisher: ""}
-                            message2={book.volumeInfo.pageCount? book.volumeInfo.pageCount + " pages": ""}
-                        />);
-                    }
-                    ) : <ActivityIndicator size="large" style={{alignSelf: 'center', marginTop: 100}}/>
+                    searchResult.items.map((book) =>
+                        <BookCard style={{ marginTop: 20 }}
+                            title={lb.getTitle(book)}
+                            author={lb.getAuthor(book)}
+                            image_link={lb.getImage(book)}
+                            message1={lb.getPublisher(book)}
+                            message2={lb.getPageCount(book)}
+                            onPress={() => navigation.navigate('Single book', { book: book })}
+                        />
+                    ) : <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 100 }} />
             }
         </MainWrapper>
     );

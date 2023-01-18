@@ -2,9 +2,9 @@ import { Image, ImageBackground, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import styles from "../styles.js";
 
-export default function BookCard({style, image_link, title, author, message1, message2}) {
+export default function BookCard({style, image_link, title, author, message1, message2, onPress}) {
     return (
-        <Card elevation = {5} style={[styles.cardContainer, style]}>
+        <Card elevation = {5} style={[styles.cardContainer, style]} onPress={onPress}>
             <ImageBackground source={require("../assets/glassBook.jpg")} resizeMode='cover' styles={styles.image}>
                 <View style={[styles.bookCard, {backgroundColor: 'rgba(0, 0, 0, 0.7)'}]}>
                     <Image style={styles.bookCover} resizeMode='cover' source={{ uri: image_link }} />
