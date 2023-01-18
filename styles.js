@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       paddingLeft: '10%',
       paddingRight: '10%',
+      paddingBottom: 40,
     },
 
     cardContainer: {
@@ -97,6 +98,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         paddingLeft: 30,
     },
+
+    pickerBox: { 
+      borderWidth: 0, 
+      width: '100%', 
+      height: 50, 
+      marginBottom: 30, 
+      marginTop: 30 
+    }
 
   });
 

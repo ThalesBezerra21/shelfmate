@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as NavigationBar from 'expo-navigation-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,6 +11,9 @@ import { useFonts } from 'expo-font';
 const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
+
+  NavigationBar.setBackgroundColorAsync("#455A64");
+
   const [fontsLoaded] = useFonts({
     'Quicksand': require('./assets/fonts/Quicksand-Medium.ttf'),
   });
@@ -26,7 +30,7 @@ export default function App() {
         inactiveColor="#CFD8DC"
         activeColor="#212121"
         labeled={false}
-        barStyle={{ backgroundColor: '#455A64' }}
+        barStyle={{ backgroundColor: '#455A64', height: 70 }}
       >
         <Tab.Screen
           name="Home"
