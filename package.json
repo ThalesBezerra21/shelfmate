@@ -9,14 +9,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@formatjs/intl-datetimeformat": "^6.4.3",
-    "@formatjs/intl-displaynames": "^6.2.3",
-    "@formatjs/intl-getcanonicallocales": "^2.0.5",
-    "@formatjs/intl-listformat": "^7.1.7",
-    "@formatjs/intl-locale": "^3.0.11",
-    "@formatjs/intl-numberformat": "^8.3.3",
-    "@formatjs/intl-pluralrules": "^5.1.8",
-    "@formatjs/intl-relativetimeformat": "^11.1.8",
     "@react-native-picker/picker": "2.4.8",
     "@react-navigation/bottom-tabs": "^6.5.3",
     "@react-navigation/material-bottom-tabs": "^6.2.11",

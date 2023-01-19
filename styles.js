@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 5,
     width: global.width,
+    minHeight: "80%",
     backgroundColor: '#F5F5F5',
     boxShadow: '10px 10px 15px 5px rgba(0, 0, 0, 0.25)',
     borderTopLeftRadius: 50,
