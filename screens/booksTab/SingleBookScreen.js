@@ -14,24 +14,24 @@ import { readableDate } from "../../lib/date";
 export default function SingleBookScreen({ route, navigation }) {
     const book = route.params.book;
 
-    const [range, setRange] = useState({ startDate: undefined, endDate: undefined });
+    const [date, setDate] = useState(undefined);;
     const [open, setOpen] = useState(false);
     const [selectedBookType, setSelectedBookType] = useState('Physical');
 
-    const onDismiss = useCallback(() => {
+    const onDismissSingle = useCallback(() => {
         setOpen(false);
     }, [setOpen]);
 
-    const onConfirm = useCallback(
-        ({ startDate, endDate }) => {
+    const onConfirmSingle = useCallback(
+        (params) => {
             setOpen(false);
-            setRange({ startDate, endDate });
+            setDate(params.date);
         },
-        [setOpen, setRange]
+        [setOpen, setDate]
     );
 
-    const goToDescription  = () => navigation.navigate("Book description", 
-        {cover: lb.getImage(book), description: lb.getDescription(book), title: lb.getTitle(book), author: lb.getAuthor(book)})
+    const goToDescription = () => navigation.navigate("Book description",
+        { cover: lb.getImage(book), description: lb.getDescription(book), title: lb.getTitle(book), author: lb.getAuthor(book) })
 
     return (
         <MainWrapper title={book.volumeInfo.title}>
@@ -42,23 +42,23 @@ export default function SingleBookScreen({ route, navigation }) {
                 message1={lb.getPublisher(book)}
                 message2={lb.getPageCount(book)}
                 style={{ marginTop: 30 }} />
-            <Button mode = "outlined" style = {{marginTop: 30, alignSelf: 'center'}} onPress = {goToDescription}>
+            <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }} onPress={goToDescription}>
                 + See description
             </Button>
             <View style={styles.roundedCard} elevation={3}>
                 <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10 }]}>
                     {
-                        typeof range.startDate == 'undefined' || typeof range.endDate == 'undefined' ?
-                            "Select the dates you started and finished the book" : `${readableDate(range.startDate)}\n${readableDate(range.endDate)}`
+                        typeof date == 'undefined' ?
+                            "Set date you started the book" : `${readableDate(date)}}`
                     }
                 </Text>
-                <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style = {{flex: 1}}>
+                <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={{ flex: 1 }}>
                     Dates
                 </Button>
             </View>
             <View style={styles.roundedCard} elevation={3}>
                 <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10 }]}>
-                   What was the type of the book?
+                    What was the type of the book?
                 </Text>
                 <Picker
                     style={{ flex: 3 }}
@@ -72,13 +72,11 @@ export default function SingleBookScreen({ route, navigation }) {
                 </Picker>
             </View>
             <DatePickerModal
-                locale="en"
-                mode="range"
+                mode="single"
                 visible={open}
-                onDismiss={onDismiss}
-                startDate={range.startDate}
-                endDate={range.endDate}
-                onConfirm={onConfirm}
+                onDismiss={onDismissSingle}
+                date={date}
+                onConfirm={onConfirmSingle}
             />
         </MainWrapper>
     );
