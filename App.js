@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BooksStack from './screens/booksTab/BooksStack';
 import HomeStack from './screens/homeTab/HomeStack';
+import UserScreen from './screens/userTab/UserScreen';
 import "./global.js"
 import { useFonts } from 'expo-font';
 import {
@@ -31,7 +32,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="Home"
+        initialRouteName="HomeStack"
         inactiveColor="#CFD8DC"
         activeColor="#212121"
         labeled={false}
@@ -54,6 +55,16 @@ export default function App() {
             tabBarLabel: 'Books',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="book" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="UserScreen"
+          component={UserScreen}
+          options={{
+            tabBarLabel: 'User',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
         />

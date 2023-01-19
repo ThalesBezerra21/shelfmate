@@ -10,6 +10,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import styles from "../../styles";
 import { readableDate } from "../../lib/date";
+import { addBookToCurrentBooks } from "../../lib/ayncStorage";
 
 export default function SingleBookScreen({ route, navigation }) {
     const book = route.params.book;
@@ -71,7 +72,8 @@ export default function SingleBookScreen({ route, navigation }) {
                     <Picker.Item label="Audio" value="Audio" />
                 </Picker>
             </View>
-            <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }}>
+            <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }} 
+                    onPress={() => addBookToCurrentBooks(book).then(() => navigation.navigate("Home"))}>
                 + Add book
             </Button>
             <DatePickerModal
