@@ -56,7 +56,7 @@ export default function SingleBookScreen({ route, navigation }) {
                     Dates
                 </Button>
             </View>
-            <View style={styles.roundedCard} elevation={3}>
+            <View style={[styles.roundedCard, {marginTop: 10}]} elevation={3}>
                 <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10 }]}>
                     What was the type of the book?
                 </Text>
@@ -71,7 +71,11 @@ export default function SingleBookScreen({ route, navigation }) {
                     <Picker.Item label="Audio" value="Audio" />
                 </Picker>
             </View>
+            <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }}>
+                + Add book
+            </Button>
             <DatePickerModal
+                locale="en"
                 mode="single"
                 visible={open}
                 onDismiss={onDismissSingle}

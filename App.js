@@ -3,11 +3,15 @@ import * as NavigationBar from 'expo-navigation-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import HomeScreen from './screens/homeTab/HomeScreen';
+import BooksStack from './screens/booksTab/BooksStack';
 import HomeStack from './screens/homeTab/HomeStack';
-import BookStack from './screens/booksTab/BookStack';
 import "./global.js"
 import { useFonts } from 'expo-font';
+import {
+  en,
+  registerTranslation,
+} from 'react-native-paper-dates'
+registerTranslation('en', en)
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -34,20 +38,20 @@ export default function App() {
         barStyle={{ backgroundColor: '#455A64', height: 70 }}
       >
         <Tab.Screen
-          name="Home"
-          component={BookStack}
+          name="HomeStack"
+          component={HomeStack}
           options={{
-            tabBarLabel: 'Books',
+            tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="home" color={color} size={26} />
             ),
           }}
         />
         <Tab.Screen
-          name="Books"
-          component={HomeStack}
+          name="BooksStack"
+          component={BooksStack}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Books',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="book" color={color} size={26} />
             ),
