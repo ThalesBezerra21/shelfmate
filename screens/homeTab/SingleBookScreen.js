@@ -1,5 +1,3 @@
-import MainWrapper from "../../components/MainWrapper";
-import BookCard from "../../components/BookCard";
 import *  as lb from "../../lib/getInfoFromBooksJson";
 import { Text, View } from "react-native";
 import { Button } from 'react-native-paper';
@@ -11,11 +9,12 @@ import 'intl/locale-data/jsonp/en';
 import styles from "../../styles";
 import { readableDate } from "../../lib/date";
 import { addBookToCurrentBooks } from "../../lib/ayncStorage";
+import BookInfoPage from "../../components/BookInfoPage";
 
 export default function SingleBookScreen({ route, navigation }) {
     const book = route.params.book;
 
-    const [date, setDate] = useState(undefined);;
+    const [date, setDate] = useState(new Date());;
     const [open, setOpen] = useState(false);
     const [selectedBookType, setSelectedBookType] = useState('Physical');
 
@@ -35,34 +34,24 @@ export default function SingleBookScreen({ route, navigation }) {
         { cover: lb.getImage(book), description: lb.getDescription(book), title: lb.getTitle(book), author: lb.getAuthor(book) })
 
     return (
-        <MainWrapper title={book.volumeInfo.title}>
-            <BookCard
-                title={lb.getTitle(book)}
-                author={lb.getAuthor(book)}
-                image_link={lb.getImage(book)}
-                message1={lb.getPublisher(book)}
-                message2={lb.getPageCount(book)}
-                style={{ marginTop: 30 }} />
+        <BookInfoPage book = {book}>
             <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }} onPress={goToDescription}>
                 + See description
             </Button>
             <View style={styles.roundedCard} elevation={3}>
-                <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10 }]}>
-                    {
-                        typeof date == 'undefined' ?
-                            "Set date you started the book" : `${readableDate(date)}}`
-                    }
+                <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10, textAlign: 'center' }]}>
+                    Day you started the book
                 </Text>
-                <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={{ flex: 1 }}>
-                    Dates
+                <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined" style={{ flex: 4 }}>
+                    {readableDate(date)}
                 </Button>
             </View>
-            <View style={[styles.roundedCard, {marginTop: 10}]} elevation={3}>
-                <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10 }]}>
+            <View style={[styles.roundedCard, { marginTop: 10 }]} elevation={3}>
+                <Text style={[styles.text, { color: 'black', flex: 3, marginHorizontal: 10, textAlign: "center" }]}>
                     What was the type of the book?
                 </Text>
                 <Picker
-                    style={{ flex: 3 }}
+                    style={{ flex: 4 }}
                     selectedValue={selectedBookType}
                     onValueChange={(itemValue) =>
                         setSelectedBookType(itemValue)
@@ -72,8 +61,9 @@ export default function SingleBookScreen({ route, navigation }) {
                     <Picker.Item label="Audio" value="Audio" />
                 </Picker>
             </View>
-            <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }} 
-                    onPress={() => addBookToCurrentBooks(book).then(() => navigation.navigate("Home"))}>
+            <Button mode="outlined" style={{ marginTop: 30, alignSelf: 'center' }}
+                onPress={() => addBookToCurrentBooks({ dateStarted: date, bookType: selectedBookType, info: book })
+                    .then(() => navigation.navigate("Home"))}>
                 + Add book
             </Button>
             <DatePickerModal
@@ -84,6 +74,6 @@ export default function SingleBookScreen({ route, navigation }) {
                 date={date}
                 onConfirm={onConfirmSingle}
             />
-        </MainWrapper>
+        </BookInfoPage>
     );
 }

@@ -7,6 +7,7 @@ import styles from "../../styles";
 import { getCurrentBooks } from "../../lib/ayncStorage";
 import { useFocusEffect } from "@react-navigation/native";
 import *  as lb from "../../lib/getInfoFromBooksJson";
+import { readableDate } from "../../lib/date"
 import { View } from "react-native";
 
 export default function BooksScreen({ navigation }) {
@@ -41,8 +42,13 @@ export default function BooksScreen({ navigation }) {
                 currentBooks != null ?
                     currentBooks.map((bk) => 
                         <BookCard style={{ marginTop: 30 }}
-                            image_link={lb.getImage(bk)} title={lb.getTitle(bk)}
-                            author={lb.getAuthor(bk)} />): null
+                            image_link={lb.getImage(bk.info)} title={lb.getTitle(bk.info)}
+                            author={lb.getAuthor(bk.info)} 
+                            message1={"Started at " + readableDate(new Date(bk.dateStarted))} 
+                            message2={lb.getPageCount(bk.info)}
+                            onPress={() => navigation.navigate("Current book info", {book: bk})}
+                        />
+                    ): null
             }
         </MainWrapper>
     );

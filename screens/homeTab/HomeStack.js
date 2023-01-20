@@ -4,6 +4,7 @@ import HomeScreen from './HomeScreen';
 import BooksSearchResult from './BooksSearchResult';
 import SingleBookScreen from './SingleBookScreen';
 import BookDescription from './BookDescription';
+import CurrentBookInfo from './CurrentBookInfo';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function HomeStack() {
             <Stack.Screen name="Search result" component={BooksSearchResult} />
             <Stack.Screen name="Single book" component={SingleBookScreen} />
             <Stack.Screen name="Book description" component={BookDescription} />
+            <Stack.Screen name="Current book info" component={CurrentBookInfo} />
         </Stack.Navigator>
     );
 }
