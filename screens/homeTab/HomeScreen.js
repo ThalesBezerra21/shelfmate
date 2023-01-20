@@ -10,13 +10,16 @@ import *  as lb from "../../lib/getInfoFromBooksJson";
 import { readableDate } from "../../lib/date"
 import { Button } from "react-native-paper";
 import AlertCard from "../../components/AlertCard";
+import  { booksReadInYear } from "../../lib/statistics"
 
 export default function BooksScreen({ navigation }) {
     const [currentBooks, setCurrentBooks] = useState(null)
+    const [booksRead, setBooksRead] = useState(0);
 
     useFocusEffect(
         useCallback(() => {
             refreshCurrentBooks()
+            booksReadInYear(new Date().getFullYear()).then((res) => setBooksRead(res))
         })
     )
 
@@ -24,7 +27,11 @@ export default function BooksScreen({ navigation }) {
 
     return (
         <MainWrapper title='Hello, Thales!'>
-            <InfoCard text1="You have read" text2='21 books' text3='this year' style={{ marginTop: 30 }} />
+            <InfoCard 
+                text1="You have read" 
+                text2={booksRead + " book" + (booksRead === 1 ? "":"s")} 
+                text3='this year' 
+                style={{ marginTop: 30 }} />
             <Button 
                 mode="outlined" 
                 onPress={() => navigation.navigate('Search result')}
@@ -34,7 +41,7 @@ export default function BooksScreen({ navigation }) {
             </Button>
             <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Current books</Text>
             {
-                currentBooks != null ?
+                currentBooks != null && !(Array.isArray(currentBooks) && currentBooks.length === 0)?
                     currentBooks.reverse().map((bk) => 
                         <BookCard style={{ marginTop: 30 }}
                             image_link={lb.getImage(bk.info)} title={lb.getTitle(bk.info)}

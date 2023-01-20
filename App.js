@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BooksStack from './screens/booksTab/BooksStack';
 import HomeStack from './screens/homeTab/HomeStack';
+import StatisticsPage from './screens/statisticsTab/StatisticsPage';
 import UserScreen from './screens/userTab/UserScreen';
 import "./global.js"
 import { useFonts } from 'expo-font';
@@ -55,6 +56,16 @@ export default function App() {
             tabBarLabel: 'Books',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="book" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="StatisticsScreen"
+          component={StatisticsPage}
+          options={{
+            tabBarLabel: 'Statistics',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="chart-line" color={color} size={26} />
             ),
           }}
         />
