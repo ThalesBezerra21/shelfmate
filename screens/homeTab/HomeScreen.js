@@ -8,15 +8,11 @@ import { getCurrentBooks } from "../../lib/ayncStorage";
 import { useFocusEffect } from "@react-navigation/native";
 import *  as lb from "../../lib/getInfoFromBooksJson";
 import { readableDate } from "../../lib/date"
-import { View } from "react-native";
+import { Button } from "react-native-paper";
+import AlertCard from "../../components/AlertCard";
 
 export default function BooksScreen({ navigation }) {
-
-    const [searchQuery, setSearchQuery] = useState('');
     const [currentBooks, setCurrentBooks] = useState(null)
-
-    const onChangeSearch = query => setSearchQuery(query);
-    const onSubmitSearch = () => navigation.navigate('Search result', { search: searchQuery })
 
     useFocusEffect(
         useCallback(() => {
@@ -29,14 +25,13 @@ export default function BooksScreen({ navigation }) {
     return (
         <MainWrapper title='Hello, Thales!'>
             <InfoCard text1="You have read" text2='21 books' text3='this year' style={{ marginTop: 30 }} />
-            <Searchbar
-                style={{ marginTop: 20 }}
-                placeholder="+ Add Books"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-                onSubmitEditing={onSubmitSearch}
-                onIconPress={onSubmitSearch}
-            />
+            <Button 
+                mode="outlined" 
+                onPress={() => navigation.navigate('Search result')}
+                style = {{marginTop: 30, width: '70%'}}    
+            >
+                    + Add books
+            </Button>
             <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Current books</Text>
             {
                 currentBooks != null ?
@@ -48,7 +43,7 @@ export default function BooksScreen({ navigation }) {
                             message2={lb.getPageCount(bk.info)}
                             onPress={() => navigation.navigate("Current book info", {book: bk})}
                         />
-                    ): null
+                    ): <AlertCard text="You don't have any books added" style = {{marginTop: 30}}/>
             }
         </MainWrapper>
     );

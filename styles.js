@@ -116,6 +116,15 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     marginTop: 30
+  },
+
+  alertCard: {
+    width: "100%", 
+    flexDirection: 'row', 
+    borderRadius: 30, 
+    backgroundColor: "#DDDDFF", 
+    padding: 20, 
+    alignItems: 'center'
   }
 
 });

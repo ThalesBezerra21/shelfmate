@@ -4,16 +4,16 @@ import { Searchbar } from "react-native-paper";
 import { useEffect, useState } from "react";
 import BookCard from "../../components/BookCard";
 import *  as lb from "../../lib/getInfoFromBooksJson";
-
+import { Text } from "react-native";
+import AlertCard from "../../components/AlertCard";
 
 export default function BooksSearchResult({ route, navigation }) {
 
-    const [searchQuery, setSearchQuery] = useState(route.params.search);
+    const [searchQuery, setSearchQuery] = useState(null);
     const [searchResult, setSearchResult] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onChangeSearch = query => setSearchQuery(query);
-
-    useEffect(() => searchBooks(), []);
 
     const searchBooks = () => {
         const getSearchResults = async () => {
@@ -31,7 +31,8 @@ export default function BooksSearchResult({ route, navigation }) {
             })
             .then(resJson => {
                 try {
-                    return setSearchResult(resJson);
+                    setLoading(false);
+                    setSearchResult(resJson);
                 } catch (error) {
                     console.log("Erro no json: " + error);
                 }
@@ -41,20 +42,21 @@ export default function BooksSearchResult({ route, navigation }) {
     return (
         <MainWrapper title="Search results">
             <Searchbar
-                style={{ marginTop: 20 }}
+                style={{ marginTop: 20, backgroundColor: '#ececec' }}
                 placeholder="+ Add Book"
                 value={searchQuery}
                 onChangeText={onChangeSearch}
                 onSubmitEditing={() => {
-                    setSearchResult(null);
+                    setLoading(true)
                     searchBooks();
                 }}
                 onIconPress={() => {
-                    setSearchResult(null);
+                    setLoading(true)
                     searchBooks();
                 }}
             />
             {
+                ! loading?
                 searchResult != null && typeof searchResult.items != 'undefined' ?
                     searchResult.items.map((book) =>
                         <BookCard style={{ marginTop: 20 }}
@@ -65,7 +67,8 @@ export default function BooksSearchResult({ route, navigation }) {
                             message2={lb.getPageCount(book)}
                             onPress={() => navigation.navigate('Single book', { book: book })}
                         />
-                    ) : <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 100 }} />
+                    ): <AlertCard style = {{marginTop: 20}} text="Search and add the books you're currently reading"/> 
+                : <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 100 }} />
             }
         </MainWrapper>
     );
