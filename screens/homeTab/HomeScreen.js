@@ -40,7 +40,7 @@ export default function BooksScreen({ navigation }) {
             <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Current books</Text>
             {
                 currentBooks != null ?
-                    currentBooks.map((bk) => 
+                    currentBooks.reverse().map((bk) => 
                         <BookCard style={{ marginTop: 30 }}
                             image_link={lb.getImage(bk.info)} title={lb.getTitle(bk.info)}
                             author={lb.getAuthor(bk.info)} 

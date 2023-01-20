@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
+import { Button } from 'react-native-paper';
 import styles from "../../styles.js"
-import Card from '../../components/InfoCard.js'
 import BookCard from '../../components/BookCard.js';
 import MainWrapper from '../../components/MainWrapper';
 import { useState, useCallback, useEffect } from "react";
@@ -23,21 +23,20 @@ export default function HomeScreen({navigation}) {
 
     return (
         <MainWrapper title={"My books"}>
-            <Card text1="You have read" text2='3 books' text3='this month' style={{ marginTop: 30 }} />
-            <Card text1="You have read" text2='22360 pages' text3='this year' style={{ marginTop: 30 }} />
-            <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Recent books</Text>
+            <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Recently finished</Text>
             {
                 readBooks != null ?
-                    readBooks.map((bk) =>
+                    readBooks.reverse().map((bk) =>
                         <BookCard style={{ marginTop: 30 }}
                             image_link={lb.getImage(bk.info)} title={lb.getTitle(bk.info)}
                             author={lb.getAuthor(bk.info)}
-                            message1={"Started at " + readableDate(new Date(bk.dateStarted))}
+                            message1={"Finished at " + readableDate(new Date(bk.dateFinished))}
                             message2={lb.getPageCount(bk.info)}
                             onPress={() => navigation.navigate('Read book info', {book: bk})}
                         />)
                     : null
             }
+            <Button mode = 'outlined' style = {{alignSelf: 'center', marginTop: 30}}>+ See all books finished</Button>
         </MainWrapper>
     );
 }

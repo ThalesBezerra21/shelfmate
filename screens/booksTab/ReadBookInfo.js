@@ -13,11 +13,7 @@ export default function ReadBookInfo({ route, navigation }) {
         { cover: lb.getImage(bk.info), description: lb.getDescription(bk.info), title: lb.getTitle(bk.info), author: lb.getAuthor(bk.info) })
 
     const deleteBook = () => deleteReadBookById(bk.info.id).then(() => navigation.navigate('Home'))
-    const markAsRead = () => transferBookFromReadToCurrent(bk.info.id)
-        .then(() => {
-            navigation.dispatch(StackActions.pop(1));
-            navigation.navigate('HomeStack');
-        })
+    const markAsRead = () => transferBookFromReadToCurrent(bk.info.id).then(() => navigation.goBack())
 
     return (
         <BookInfoPage book={bk.info}>
