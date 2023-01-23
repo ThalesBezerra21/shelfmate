@@ -6,14 +6,16 @@ import { DatePickerModal } from 'react-native-paper-dates';
 import { deleteCurrentBookById, transferBookFromCurrentToRead } from "../../lib/ayncStorage";
 import { useState, useCallback } from "react";
 import { readableDate } from "../../lib/date";
+import CustomDialog from "../../components/CustomDialog";
 import styles from "../../styles";
 
 export default function CurrentBookInfo({ route, navigation }) {
     
     const bk = route.params.book;
 
-    const [date, setDate] = useState(new Date());;
+    const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
+    const [visibleDeleteDialog, setVisibleDeleteDialog] = useState(false);
 
     const onDismissSingle = useCallback(() => {
         setOpen(false);
@@ -26,7 +28,7 @@ export default function CurrentBookInfo({ route, navigation }) {
         },
         [setOpen, setDate]
     );
-
+    
     const goToDescription = () => navigation.navigate("Book description",
         { cover: lb.getImage(bk.info), description: lb.getDescription(bk.info), title: lb.getTitle(bk.info), author: lb.getAuthor(bk.info) })
 
@@ -39,7 +41,7 @@ export default function CurrentBookInfo({ route, navigation }) {
                 <Button mode="outlined" onPress={goToDescription}>
                     + See description
                 </Button>
-                <Button mode='outlined' onPress={deleteBook}>
+                <Button mode='outlined' onPress={() => setVisibleDeleteDialog(true)}>
                     Delete
                 </Button>
             </View>
@@ -58,6 +60,11 @@ export default function CurrentBookInfo({ route, navigation }) {
                 onDismiss={onDismissSingle}
                 date={date}
                 onConfirm={onConfirmSingle}
+            />
+            <CustomDialog
+                text='Do you want to delete this book?'
+                labelAction='Delete'
+                action={deleteBook} visible={visibleDeleteDialog} setVisible={setVisibleDeleteDialog}
             />
             <Button mode = 'outlined' onPress={markAsRead} style={{marginTop: 20, alignSelf: 'center'}}>Mark as read</Button>
         </BookInfoPage>

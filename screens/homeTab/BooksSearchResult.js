@@ -58,7 +58,7 @@ export default function BooksSearchResult({ route, navigation }) {
             {
                 ! loading?
                 searchResult != null && typeof searchResult.items != 'undefined' ?
-                    searchResult.items.map((book) =>
+                    searchResult.items.map((book, idx) =>
                         <BookCard style={{ marginTop: 20 }}
                             title={lb.getTitle(book)}
                             author={lb.getAuthor(book)}
@@ -66,6 +66,7 @@ export default function BooksSearchResult({ route, navigation }) {
                             message1={lb.getPublisher(book)}
                             message2={lb.getPageCount(book)}
                             onPress={() => navigation.navigate('Single book', { book: book })}
+                            key = {idx}
                         />
                     ): <AlertCard style = {{marginTop: 20}} text="Search and add the books you're currently reading"/> 
                 : <ActivityIndicator size="large" style={{ alignSelf: 'center', marginTop: 100 }} />

@@ -26,19 +26,19 @@ export default function HomeScreen({ navigation }) {
         <MainWrapper title={"My books"}>
             <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Recently finished</Text>
             {
-                readBooks != null ?
+                readBooks != null && readBooks.length !== 0 ?
                     <>
                         {
-                            readBooks.reverse().map((bk) =>
+                            readBooks.reverse().map((bk, idx) =>
                                 <BookCard style={{ marginTop: 30 }}
                                     image_link={lb.getImage(bk.info)} title={lb.getTitle(bk.info)}
                                     author={lb.getAuthor(bk.info)}
                                     message1={"Finished at " + readableDate(new Date(bk.dateFinished))}
                                     message2={lb.getPageCount(bk.info)}
                                     onPress={() => navigation.navigate('Read book info', { book: bk })}
+                                    key = {idx}
                                 />)
                         }
-                        <Button mode='outlined' style={{ alignSelf: 'center', marginTop: 30 }}>+ See all books finished</Button>
                     </>
                     : <AlertCard text="You haven't marked any books as finished yet" style = {{marginTop: 30}}/>
             }

@@ -7,6 +7,7 @@ import BooksStack from './screens/booksTab/BooksStack';
 import HomeStack from './screens/homeTab/HomeStack';
 import StatisticsPage from './screens/statisticsTab/StatisticsPage';
 import UserScreen from './screens/userTab/UserScreen';
+import { Provider as PaperProvider } from 'react-native-paper';
 import "./global.js"
 import { useFonts } from 'expo-font';
 import {
@@ -17,7 +18,15 @@ registerTranslation('en', en)
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function App() {
+export default function Main() {
+  return (
+    <PaperProvider>
+      <App />
+    </PaperProvider>
+  );
+}
+
+function App() {
 
   NavigationBar.setBackgroundColorAsync("#455A64");
 
@@ -83,3 +92,4 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
