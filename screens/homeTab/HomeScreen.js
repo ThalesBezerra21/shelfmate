@@ -4,7 +4,7 @@ import { Text, Searchbar } from "react-native-paper";
 import InfoCard from "../../components/InfoCard";
 import BookCard from "../../components/BookCard";
 import styles from "../../styles";
-import { getCurrentBooks } from "../../lib/ayncStorage";
+import { getCurrentBooks, getUserName } from "../../lib/ayncStorage";
 import { useFocusEffect } from "@react-navigation/native";
 import *  as lb from "../../lib/getInfoFromBooksJson";
 import { readableDate } from "../../lib/date"
@@ -15,18 +15,21 @@ import  { countBooksReadInYear } from "../../lib/statistics"
 export default function BooksScreen({ navigation }) {
     const [currentBooks, setCurrentBooks] = useState(null)
     const [booksRead, setBooksRead] = useState(0);
+    const [userName, setUserNameState] = useState("User");
 
     useFocusEffect(
         useCallback(() => {
-            refreshCurrentBooks()
-            countBooksReadInYear(new Date().getFullYear()).then((res) => setBooksRead(res))
+            refreshCurrentBooks();
+            countBooksReadInYear(new Date().getFullYear()).then((res) => setBooksRead(res));
+            getUserName().then((res) => setUserNameState(res))
+                .catch((e) => console.log(e));
         })
     )
 
     const refreshCurrentBooks = () => getCurrentBooks().then((res) => setCurrentBooks(res));
 
     return (
-        <MainWrapper title='Hello, Thales!'>
+        <MainWrapper title={`Hello, ${userName}!`}>
             <InfoCard 
                 text1="You have read" 
                 text2={booksRead + " book" + (booksRead === 1 ? "":"s")} 

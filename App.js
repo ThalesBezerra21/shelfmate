@@ -74,16 +74,6 @@ function App() {
           options={{
             tabBarLabel: 'Statistics',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="chart-line" color={color} size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="UserScreen"
-          component={UserScreen}
-          options={{
-            tabBarLabel: 'User',
-            tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="account" color={color} size={26} />
             ),
           }}
