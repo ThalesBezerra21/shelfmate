@@ -6,7 +6,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import BooksStack from './screens/booksTab/BooksStack';
 import HomeStack from './screens/homeTab/HomeStack';
 import StatisticsPage from './screens/statisticsTab/StatisticsPage';
-import UserScreen from './screens/userTab/UserScreen';
 import { Provider as PaperProvider } from 'react-native-paper';
 import "./global.js"
 import { useFonts } from 'expo-font';
