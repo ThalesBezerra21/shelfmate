@@ -1,0 +1,10 @@
+# book-tracker
+
+App de acompanhamento de leitura feito com React Native e Expo. Funcionalidades de armazenar livros em leitura e já lidos, e ver estatísticas de leitura. 
+Usa a API do Google Books para listar os livros, e utiliza armazenamento local.
+
+![Screenshot_20230123-135335](https://user-images.githubusercontent.com/62716614/215587714-6e9121e6-03ac-497e-93ba-7ba511e7aba9.png)
+
+![Screenshot_20230123-135325](https://user-images.githubusercontent.com/62716614/215587783-659280d2-ad84-4ba7-a4b6-5722d28e5071.png)
+
+![Screenshot_20230123-135253](https://user-images.githubusercontent.com/62716614/215587804-b48a2255-ccb9-45fe-a41d-37dafc943ce2.png)
