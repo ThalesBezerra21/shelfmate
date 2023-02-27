@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Thales - Simple Book Tracker",
+    "name": "ShelfMate - Book Tracker",
     "slug": "book-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/shelfmate.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/shelfmate_splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,6 +22,9 @@
     },
     "android": {
       "package": "com.thalesbezerra.booktracker"
+    },
+    "androidStatusBar": {
+      "barStyle": "dark-content"
     },
     "web": {
       "favicon": "./assets/favicon.png"
