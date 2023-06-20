@@ -1,10 +1,10 @@
-import { ImageBackground, Text, View } from 'react-native';
-import { Card } from 'react-native-paper';
+import { ImageBackground, Text, View, Pressable } from 'react-native';
+import { Card, TouchableRipple } from 'react-native-paper';
 import styles from "../styles.js";
 
-export default function InfoCard({text1, text2, text3, style}) {
+export default function InfoCard({text1, text2, text3, style, onPress}) {
     return (
-        <Card elevation = {3} style={[styles.cardContainer, style]}>
+        <TouchableRipple elevation = {3} style={[styles.cardContainer, style]} onPress = {onPress}>
             <ImageBackground source={require("../assets/readingBook.jpg")} resizeMode='cover' styles={styles.image}>
                 <View style = {styles.card}>
                     <Text style = {styles.text} >{text1}</Text>
@@ -12,6 +12,6 @@ export default function InfoCard({text1, text2, text3, style}) {
                     <Text style = {styles.text}>{text3}</Text>
                 </View>
             </ImageBackground>
-        </Card>
+        </TouchableRipple>
     );
 }

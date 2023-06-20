@@ -34,7 +34,9 @@ export default function BooksScreen({ navigation }) {
                 text1="You have read" 
                 text2={booksRead + " book" + (booksRead === 1 ? "":"s")} 
                 text3='this year' 
-                style={{ marginTop: 30 }} />
+                style={{ marginTop: 30 }} 
+                onPress={() => navigation.navigate("BooksStack")}
+            />
             <Button 
                 mode="outlined" 
                 onPress={() => navigation.navigate('Search result')}
@@ -42,7 +44,7 @@ export default function BooksScreen({ navigation }) {
             >
                     + Add books
             </Button>
-            <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>Current books</Text>
+            <Text style={[styles.textLarge, { color: 'black', marginTop: 30, marginLeft: 15 }]}>My books</Text>
             {
                 currentBooks != null && !(Array.isArray(currentBooks) && currentBooks.length === 0)?
                     currentBooks.reverse().map((bk, idx) => 
@@ -54,7 +56,7 @@ export default function BooksScreen({ navigation }) {
                             onPress={() => navigation.navigate("Current book info", {book: bk})}
                             key={idx}
                         />
-                    ): <AlertCard text="You don't have any books added" style = {{marginTop: 30}}/>
+                    ): <AlertCard text="Add books that you're reading currently or plan to read soon" style = {{marginTop: 30}}/>
             }
         </MainWrapper>
     );

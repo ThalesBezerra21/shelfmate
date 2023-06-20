@@ -8,7 +8,7 @@ export default function AlertCard({text, style}) {
     return (
         <View elevation={1} style = {[styles.alertCard, style]}>
             <Avatar.Icon size = {48} icon = 'information'/>
-            <Text style = {{color: 'black', fontFamily: 'Quicksand', textAlign: 'justify', marginHorizontal: 30}}>{text}</Text>
+            <Text style = {{color: 'black', fontFamily: 'Quicksand', textAlign: 'left', marginHorizontal: 30}}>{text}</Text>
         </View>
     );
 }
