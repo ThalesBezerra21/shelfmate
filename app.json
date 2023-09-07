@@ -24,7 +24,7 @@
       "package": "com.thalesbezerra.booktracker"
     },
     "androidStatusBar": {
-      "barStyle": "dark-content"
+      "barStyle": "light-content"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -17,7 +17,7 @@ export default function MainWrapper({title, children}) {
                     </View>
                 </ScrollView>
             </ImageBackground>
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
         </View>
     );
 }
