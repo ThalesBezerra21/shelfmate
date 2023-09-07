@@ -34,7 +34,9 @@ export default function BooksScreen({ navigation }) {
                 text1="You have read" 
                 text2={booksRead + " book" + (booksRead === 1 ? "":"s")} 
                 text3='this year' 
-                style={{ marginTop: 30 }} />
+                style={{ marginTop: 30 }} 
+                onPress={() => navigation.navigate("BooksStack")}
+            />
             <Button 
                 mode="outlined" 
                 onPress={() => navigation.navigate('Search result')}
